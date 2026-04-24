@@ -2,7 +2,7 @@
 
 # Hi 👋, I'm Mark Glenn Serinas
 
-### 💻 Passionate Frontend Developer from the Philippines
+### 💻 Passionate Software/Web Developer from the Philippines
 
 <img src="https://komarev.com/ghpvc/?username=themaker0&label=Profile%20views&color=0e75b6&style=for-the-badge" alt="Profile Views" />
 
