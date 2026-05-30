@@ -14,7 +14,7 @@
 
 ### 🙋‍♂️ About Me
 
-- 🌱 Currently learning **Computer Science**
+- 🌱 Currently A **Assistant Web / Software Developer**
 - 💬 Ask me about **HTML, CSS, JavaScript**
 - 📫 Reach me at **glenm906@gmail.com**
 - ⚡ Fun fact: I love building clean and responsive UIs
