@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mark Glenn — Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:  #ffffff;
+      --off:    #f7f7f5;
+      --ink:    #111111;
+      --mid:    #555555;
+      --faint:  #e4e4e0;
+      --accent: #2563eb;
+      --mono:   'DM Mono', monospace;
+      --sans:   'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 60px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-logo {
+      font-family: var(--mono); font-size: 0.85rem; font-weight: 500;
+      color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 500; color: var(--mid);
+      text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 2rem 4rem; max-width: 760px; margin: 0 auto;
+    }
+    #code-canvas {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      z-index: 0; pointer-events: none; opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    #code-canvas.visible { opacity: 1; }
+    .hero-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.38) 60%, rgba(255,255,255,0.75) 100%);
+      z-index: 1; pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-tag {
+      font-family: var(--mono); font-size: 0.78rem; color: var(--accent);
+      letter-spacing: 0.08em; margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 600;
+      line-height: 1.12; letter-spacing: -0.03em; margin-bottom: 1.25rem;
+    }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--mid); max-width: 480px;
+      margin-bottom: 2.5rem; line-height: 1.7;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--ink); color: var(--white); text-decoration: none;
+      padding: 0.72rem 1.5rem; font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.04em; border-radius: 4px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { background: var(--accent); transform: translateY(-1px); }
+    .hero-cta svg { width: 14px; height: 14px; }
+
+    /* CONTENT SECTIONS */
+    section.cs {
+      position: relative; z-index: 10; background: var(--white);
+      max-width: 760px; margin: 0 auto; padding: 6rem 2rem;
+    }
+    .section-label {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--accent);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: 1.75rem; font-weight: 600;
+      letter-spacing: -0.025em; margin-bottom: 1.5rem;
+    }
+
+    /* ABOUT */
+    #about { border-top: 1px solid var(--faint); }
+    .about-text { font-size: 1rem; color: var(--mid); line-height: 1.8; max-width: 600px; }
+    .about-text p + p { margin-top: 1rem; }
+
+    /* SKILLS */
+    #skills-wrap {
+      position: relative; z-index: 10; background: var(--off);
+      border-top: 1px solid var(--faint);
+    }
+    #skills { background: transparent; border-top: none; }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px; border: 1px solid var(--faint); background: var(--faint);
+    }
+    .skill-cell { background: var(--off); padding: 1.25rem 1.5rem; }
+    .skill-cell h3 {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--mid); margin-bottom: 0.75rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-size: 0.75rem; background: var(--white); border: 1px solid var(--faint);
+      color: var(--ink); padding: 0.2rem 0.6rem; border-radius: 3px;
+    }
+
+    /* PROJECTS */
+    #projects { border-top: 1px solid var(--faint); }
+    .project-list { display: flex; flex-direction: column; }
+    .project-item {
+      padding: 2rem 0; border-bottom: 1px solid var(--faint);
+      color: inherit; display: block; cursor: pointer;
+    }
+    .project-item:first-child { border-top: 1px solid var(--faint); }
+    .project-img-wrap {
+      width: 100%; height: 210px; border-radius: 6px; overflow: hidden;
+      margin-bottom: 1.25rem; background: var(--off); border: 1px solid var(--faint);
+    }
+    .project-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .project-item:hover .project-img-wrap img { transform: scale(1.03); }
+    .project-img-placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center;
+      justify-content: center; flex-direction: column; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.73rem; color: var(--mid);
+    }
+    .project-img-placeholder svg { width: 28px; height: 28px; stroke: var(--faint); }
+    .project-meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .project-title {
+      font-size: 1rem; font-weight: 600; letter-spacing: -0.01em;
+      margin-bottom: 0.3rem; transition: color 0.2s;
+    }
+    .project-item:hover .project-title { color: var(--accent); }
+    .project-desc { font-size: 0.85rem; color: var(--mid); line-height: 1.5; max-width: 500px; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem; }
+    .project-stack span {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--mid);
+      background: var(--off); border: 1px solid var(--faint);
+      padding: 0.15rem 0.5rem; border-radius: 2px;
+    }
+    .project-arrow {
+      font-size: 1.1rem; color: var(--faint); flex-shrink: 0;
+      transition: color 0.2s, transform 0.2s; padding-top: 2px;
+    }
+    .project-item:hover .project-arrow { color: var(--accent); transform: translate(3px,-3px); }
+
+    /* ── MODAL ── */
+    .modal-backdrop {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 10px;
+      max-width: 780px; width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalIn 0.25s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(18px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem; z-index: 10;
+      background: var(--off); border: 1px solid var(--faint);
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1rem; color: var(--mid);
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-close:hover { background: var(--ink); color: var(--white); }
+
+    /* Gallery */
+    .modal-gallery {
+      position: relative;
+      background: #111;
+      border-radius: 10px 10px 0 0;
+      overflow: hidden;
+      height: 340px;
+    }
+
+    .gallery-slides { display: flex; height: 100%; transition: transform 0.4s ease; }
+
+    .gallery-slide {
+      min-width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .gallery-slide img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain;
+    }
+
+    .gallery-slide .no-img {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.78rem; color: #555;
+    }
+
+    .gallery-prev, .gallery-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.15); border: none;
+      color: #fff; width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.1rem;
+      transition: background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .gallery-prev { left: 1rem; }
+    .gallery-next { right: 1rem; }
+    .gallery-prev:hover, .gallery-next:hover { background: rgba(255,255,255,0.35); }
+
+    .gallery-dots {
+      position: absolute; bottom: 0.75rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 0.4rem;
+    }
+    .gallery-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.35); cursor: pointer;
+      transition: background 0.2s;
+    }
+    .gallery-dot.active { background: #fff; }
+
+    /* Modal body */
+    .modal-body { padding: 1.75rem 2rem 2rem; }
+
+    .modal-title {
+      font-size: 1.2rem; font-weight: 600; letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .modal-desc {
+      font-size: 0.88rem; color: var(--mid); line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .modal-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.5rem; }
+    .modal-stack span {
+      font-family: var(--mono); font-size: 0.7rem; color: var(--mid);
+      background: var(--off); border: 1px solid var(--faint);
+      padding: 0.2rem 0.6rem; border-radius: 3px;
+    }
+
+    .modal-open-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--accent); color: var(--white);
+      text-decoration: none; padding: 0.7rem 1.4rem;
+      font-size: 0.82rem; font-weight: 600; border-radius: 5px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .modal-open-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .modal-open-btn svg { width: 14px; height: 14px; }
+
+    /* CONTACT */
+    #contact { border-top: 1px solid var(--faint); }
+    .contact-intro { font-size: 1rem; color: var(--mid); margin-bottom: 2.5rem; max-width: 460px; line-height: 1.7; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.85rem; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-size: 0.9rem; color: var(--ink); text-decoration: none;
+      font-weight: 500; transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link-label {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--mid);
+      text-transform: uppercase; letter-spacing: 0.08em; width: 55px;
+    }
+
+    footer {
+      position: relative; z-index: 10; background: var(--white);
+      border-top: 1px solid var(--faint); padding: 2rem; text-align: center;
+      font-size: 0.75rem; color: var(--mid); font-family: var(--mono);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1.25rem; }
+      .nav-links a { font-size: 0.72rem; }
+      section.cs { padding: 4rem 1.25rem; }
+      .modal-gallery { height: 220px; }
+      .modal-body { padding: 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+      #code-canvas { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="code-canvas"></canvas>
+<div class="hero-overlay" id="hero-overlay"></div>
+
+<!-- ── MODAL ── -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+
+    <div class="modal-gallery">
+      <div class="gallery-slides" id="gallery-slides"></div>
+      <button class="gallery-prev" id="gallery-prev">&#8592;</button>
+      <button class="gallery-next" id="gallery-next">&#8594;</button>
+      <div class="gallery-dots" id="gallery-dots"></div>
+    </div>
+
+    <div class="modal-body">
+      <p class="modal-title" id="modal-title"></p>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-stack" id="modal-stack"></div>
+      <a class="modal-open-btn" id="modal-link" href="#" target="_blank" rel="noopener">
+        Open Project
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 12L12 4M6 4h6v6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <a class="nav-logo" href="#hero">Air.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <p class="hero-tag">// available for work</p>
+    <h1>Hi, I'm Mark Glenn.<br>I am Software / Web developer.</h1>
+    <p class="hero-sub">Full-stack developer with a focus on clean code, fast interfaces, and things that actually work.</p>
+    <a class="hero-cta" href="#projects">
+      See my work
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="cs" id="about">
+  <p class="section-label">About</p>
+  <h2>A bit about me</h2>
+  <div class="about-text">
+    <p>I'm a web and software developer based in Tarlac City. I enjoy building products from the ground up — from database schema to polished UI — and I care a lot about the details in between.</p>
+    <p>When I'm not writing code, I'm probably reading about systems design, tinkering with side projects, or drinking too much coffee.</p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div id="skills-wrap">
+  <section class="cs" id="skills">
+    <p class="section-label">Skills</p>
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <h3>Languages</h3>
+        <div class="skill-tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Python</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">PHP</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <h3>Frontend</h3>
+        <div class="skill-tags">
+          <span class="tag">React</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">Tailwind</span>
+          <span class="tag">Vue</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <h3>Backend</h3>
+        <div class="skill-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">GraphQL</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <h3>Tools & Infra</h3>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Vercel</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PROJECTS -->
+<section class="cs" id="projects">
+  <p class="section-label">Projects</p>
+  <h2>Things I've built</h2>
+  <div class="project-list">
+
+    <!-- PROJECT 1: DARTS
+         images[] = list of screenshot paths for the gallery
+         link     = live URL or GitHub link -->
+    <div class="project-item" data-project="0">
+      <div class="project-img-wrap">
+        <img src="/img/darts.png" alt="DARTS screenshot"
+          onerror="this.style.display='none';this.parentElement.innerHTML+='<div class=\'project-img-placeholder\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg><span>Add project image</span></div>'" />
+      </div>
+      <div class="project-meta">
+        <div>
+          <p class="project-title">DARTS — Disease Assessment & Recognition System</p>
+          <p class="project-desc">A web-based system built to help farmers in Tarlac City identify and assess rice crop diseases using modern technology. Provides smart, accessible solutions to support local agriculture and protect harvests.</p>
+          <div class="project-stack"><span>Python</span><span>JavaScript</span><span>HTML</span><span>CSS</span><span>MySQL</span></div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: SWIFT PASS -->
+    <div class="project-item" data-project="1">
+      <div class="project-img-wrap">
+        <img src="/img/swiftpass.png" alt="Swift Pass screenshot"
+          onerror="this.style.display='none';this.parentElement.innerHTML+='<div class=\'project-img-placeholder\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg><span>Add project image</span></div>'" />
+      </div>
+      <div class="project-meta">
+        <div>
+          <p class="project-title">Swift Pass — E-Wallet Management System</p>
+          <p class="project-desc">A web-based system designed to manage an e-wallet platform for students and drivers. Features an admin dashboard with real-time balance tracking, role-based user management, and full account control.</p>
+          <div class="project-stack"><span>Python</span><span>Tailwind</span><span>HTML</span><span>CSS</span><span>MySQL</span></div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: EIMIS -->
+    <div class="project-item" data-project="2">
+      <div class="project-img-wrap">
+        <img src="/img/eimis.png" alt="Eimis screenshot"
+          onerror="this.style.display='none';this.parentElement.innerHTML+='<div class=\'project-img-placeholder\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><path d=\'M21 15l-5-5L5 21\'/></svg><span>Add project image</span></div>'" />
+      </div>
+      <div class="project-meta">
+        <div>
+          <p class="project-title">Eimis Demo</p>
+          <p class="project-desc">A web-based demo system. Add your description here — what does it do, who is it for, and what problem does it solve?</p>
+          <div class="project-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="cs" id="contact">
+  <p class="section-label">Contact</p>
+  <h2>Let's talk</h2>
+  <p class="contact-intro">Open to freelance projects, full-time roles, and interesting conversations. Best way to reach me is email.</p>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:Mark@dentair.shop">
+      <span class="contact-link-label">Email</span>Mark@dentair.shop
+    </a>
+    <a class="contact-link" href="https://github.com/TheMaker0" target="_blank" rel="noopener">
+      <span class="contact-link-label">GitHub</span>github.com/TheMaker0
+    </a>
+  </div>
+</section>
+
+<footer>© 2026 Mark Glenn &nbsp;·&nbsp; Built with care</footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   PROJECT DATA
+   images: array of paths shown in the gallery
+   link:   URL for the "Open Project" button
+   ═══════════════════════════════════════════ */
+const PROJECTS = [
+  {
+    title: 'DARTS — Disease Assessment & Recognition System',
+    desc:  'A web-based system built to help farmers in Tarlac City identify and assess rice crop diseases using modern technology. Provides smart, accessible, and sustainable solutions for disease recognition — helping farmers make informed decisions to protect their harvests.',
+    stack: ['Python', 'JavaScript', 'HTML', 'CSS', 'MySQL'],
+    images: ['/img/darts.png', '/img/darts1.png', '/img/darts2.png'],  // add more screenshots here
+    link:  '#'   // replace with your live URL or GitHub link
+  },
+  {
+    title: 'Swift Pass — E-Wallet Management System',
+    desc:  'A web-based system designed to manage an e-wallet platform for students and drivers. Built with an admin dashboard that tracks total platform balance, monitors registered users, and manages role-based accounts in real time.',
+    stack: ['Python', 'Tailwind', 'HTML', 'CSS', 'MySQL'],
+    images: ['/img/swiftpass.png', '/img/swiftpass1.png','/img/swiftpass2.png','/img/swiftpass3.png'],  // add more screenshots here
+    link:  '#'   // replace with your live URL or GitHub link
+  },
+  {
+    title: 'Eimis Demo',
+    desc:  'A web-based demo system. Add your description here — what does it do, who is it for, and what problem does it solve?',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    images: ['/img/eimis.png','/img/eimis1.png','/img/eimis2.png'],  // add more screenshots here
+    link:  '#'   // replace with your live URL or GitHub link
+  }
+];
+
+/* ── MODAL LOGIC ── */
+const backdrop = document.getElementById('modal-backdrop');
+const modalClose = document.getElementById('modal-close');
+const gallerySlides = document.getElementById('gallery-slides');
+const galleryDots = document.getElementById('gallery-dots');
+const prevBtn = document.getElementById('gallery-prev');
+const nextBtn = document.getElementById('gallery-next');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-desc');
+const modalStack = document.getElementById('modal-stack');
+const modalLink = document.getElementById('modal-link');
+
+let currentSlide = 0;
+let totalSlides = 0;
+
+function openModal(index) {
+  const p = PROJECTS[index];
+  currentSlide = 0;
+  totalSlides = p.images.length;
+
+  // title / desc / stack / link
+  modalTitle.textContent = p.title;
+  modalDesc.textContent  = p.desc;
+  modalStack.innerHTML   = p.stack.map(s => `<span>${s}</span>`).join('');
+  modalLink.href         = p.link;
+
+  // hide open button if no real link
+  modalLink.style.display = p.link === '#' ? 'none' : 'inline-flex';
+
+  // build slides
+  gallerySlides.innerHTML = p.images.map((src, i) => `
+    <div class="gallery-slide">
+      <img src="${src}" alt="Screenshot ${i+1}"
+        onerror="this.parentElement.innerHTML='<div class=\'no-img\'>📷 No image found</div>'" />
+    </div>
+  `).join('');
+
+  // build dots
+  galleryDots.innerHTML = p.images.map((_, i) =>
+    `<div class="gallery-dot${i===0?' active':''}" data-i="${i}"></div>`
+  ).join('');
+
+  // hide arrows if only 1 image
+  prevBtn.style.display = totalSlides > 1 ? 'flex' : 'none';
+  nextBtn.style.display = totalSlides > 1 ? 'flex' : 'none';
+
+  goToSlide(0);
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  backdrop.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function goToSlide(n) {
+  currentSlide = (n + totalSlides) % totalSlides;
+  gallerySlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+  document.querySelectorAll('.gallery-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === currentSlide);
+  });
+}
+
+prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+galleryDots.addEventListener('click', e => {
+  if (e.target.dataset.i !== undefined) goToSlide(+e.target.dataset.i);
+});
+modalClose.addEventListener('click', closeModal);
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// attach click to project cards
+document.querySelectorAll('.project-item').forEach(el => {
+  el.addEventListener('click', () => openModal(+el.dataset.project));
+});
+
+/* ── CODE RAIN ── */
+(function() {
+  const canvas = document.getElementById('code-canvas');
+  const ctx = canvas.getContext('2d');
+  const heroOverlay = document.getElementById('hero-overlay');
+
+  const snippets = [
+    'const fetch = async (url) => {','function render(component) {',
+    'import React, { useState }','export default function App()',
+    'db.query("SELECT * FROM users")','git commit -m "feat: add"',
+    'npm install --save-dev','docker build -t myapp .',
+    'SELECT id, name FROM users','res.status(200).json(data)',
+    'useEffect(() => {}, [])','const [state, setState] =',
+    'router.get("/api", handler)','.then(res => res.json())',
+    'async function getData() {','if (err) throw new Error(err)',
+    'module.exports = router','flex-direction: column;',
+    'border-radius: 8px;','transform: translateX(-50%)',
+    'z-index: 100; position: fixed','background: rgba(0,0,0,0.5)',
+    'grid-template-columns: 1fr 1fr','@media (max-width: 600px) {',
+    'console.log("value:", val)','return <div className="wrap">',
+    '{props.children}','arr.map(item => item.id)',
+    'Object.keys(config).forEach','Promise.all([a, b, c])',
+    'interface User { id: number }','type Props = { name: string }',
+    'const router = express.Router()','app.use(express.json())',
+    'await prisma.user.findMany()',
+  ];
+
+  let streams = [], W, H;
+  const FONT_SIZE = 13, LH = FONT_SIZE * 1.7;
+  const SPEED_MIN = 0.4, SPEED_MAX = 1.0;
+  const rand = (a,b) => a + Math.random()*(b-a);
+
+  function makeStream(x, y) {
+    const numLines = Math.ceil(H / LH) + 4;
+    return {
+      x: x ?? rand(0,W), y: y ?? H+LH,
+      speed: rand(SPEED_MIN,SPEED_MAX),
+      alpha: rand(0.35,0.6),
+      blue: Math.random() > 0.65,
+      lines: Array.from({length:numLines}, ()=>snippets[Math.floor(Math.random()*snippets.length)])
+    };
+  }
+
+  function buildStreams() {
+    const count = Math.ceil(W/240)+3; streams=[];
+    for(let i=0;i<count;i++){
+      const s=makeStream((W/count)*i+rand(10,W/count-10),rand(-H,H));
+      streams.push(s);
+    }
+  }
+
+  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; buildStreams(); }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    ctx.font=`${FONT_SIZE}px 'DM Mono','Courier New',monospace`;
+    ctx.textBaseline='top';
+    for(const s of streams){
+      const bc=s.blue?'37,99,235':'30,30,30';
+      for(let i=0;i<s.lines.length;i++){
+        const y=s.y+i*LH;
+        if(y<-LH||y>H+LH) continue;
+        const fade=1-(i/s.lines.length)*0.6;
+        const a=i===0?Math.min(s.alpha*1.8,0.85):s.alpha*fade;
+        ctx.fillStyle=`rgba(${bc},${a})`;
+        ctx.fillText(s.lines[i],s.x,y);
+      }
+      s.y-=s.speed;
+      if(s.y+s.lines.length*LH<0){
+        s.y=H+LH*2; s.x=rand(0,W);
+        s.speed=rand(SPEED_MIN,SPEED_MAX);
+        s.alpha=rand(0.35,0.6);
+        s.blue=Math.random()>0.65;
+        s.lines=s.lines.map(()=>snippets[Math.floor(Math.random()*snippets.length)]);
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  const hero=document.getElementById('hero');
+  new IntersectionObserver(entries=>{
+    const vis=entries[0].isIntersecting;
+    canvas.classList.toggle('visible',vis);
+    heroOverlay.style.display=vis?'block':'none';
+  },{threshold:0.05}).observe(hero);
+
+  window.addEventListener('resize',resize);
+  resize(); draw();
+})();
+</script>
+</body>
+</html>
