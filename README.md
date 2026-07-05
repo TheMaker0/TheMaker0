@@ -1,8 +1,8 @@
 <div align="center">
 
-<a href="https://github.com/themaker0">
-  <img src="https://raw.githubusercontent.com/themaker0/themaker0/main/assets/hero-banner.svg" alt="Mark Glenn Serinas - Software / Web Developer" width="100%"/>
-</a>
+# Hi 👋, I'm Mark Glenn Serinas
+
+### 💻 Passionate Software/Web Developer from the Philippines
 
 <img src="https://komarev.com/ghpvc/?username=themaker0&label=Profile%20views&color=0e75b6&style=for-the-badge" alt="Profile Views" />
 
@@ -14,9 +14,8 @@
 
 ### 🙋‍♂️ About Me
 
-- 🌱 Currently an **Assistant Web / Software Developer**
+- 🌱 Currently A **Assistant Web / Software Developer**
 - 💬 Ask me about **HTML, CSS, JavaScript**
-- 🚀 Working on personal and freelance web projects
 - 📫 Reach me at **glenm906@gmail.com**
 - ⚡ Fun fact: I love building clean and responsive UIs
 
@@ -27,29 +26,21 @@
 <a href="https://fb.com/marck.facun.0120" target="_blank">
   <img src="https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white" alt="Facebook"/>
 </a>
+<a href="https://instagram.com/serrinaaawsss" target="_blank">
+  <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white" alt="Instagram"/>
+</a>
 <a href="mailto:glenm906@gmail.com">
   <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
 </a>
 <a href="https://github.com/themaker0" target="_blank">
   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
 </a>
-<!-- Swap or add your LinkedIn once you have one — it's one of the highest-value links on a dev profile:
-<a href="https://linkedin.com/in/your-handle" target="_blank">
-  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-</a>
--->
 
 <br/><br/>
 
 ---
 
 ### 🛠️ Languages & Tools
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/themaker0/themaker0/main/assets/languages-marquee.svg" alt="Languages marquee" width="100%"/>
-</div>
-
-<br/>
 
 #### 🖥️ Programming Languages
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -84,21 +75,6 @@
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS%20Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
-
----
-
-### 📌 Featured Projects
-
-> 🚧 Currently building out a few projects worth sharing here — check back soon!
-> In the meantime, feel free to browse [all my repositories](https://github.com/themaker0?tab=repositories).
-
-<!--
-Once you have 2-4 solid repos, replace the note above with pin cards like this:
-
-<a href="https://github.com/themaker0/project-name">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=themaker0&repo=project-name&theme=tokyonight" />
-</a>
--->
 
 ---
 
