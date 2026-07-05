@@ -1,10 +1,8 @@
 <div align="center">
 
-# Hi, I'm Mark Glenn Serinas 👋
-
-### 💻 Software / Web Developer from the Philippines
-
-<img src="https://readme-typing-svg.demolab.com/?lines=Building+clean%2C+responsive+UIs;Always+learning+something+new;Open+to+collaboration+%26+freelance+work&font=Fira%20Code&center=true&width=440&height=45&color=0e75b6&vCenter=true&size=20" alt="Typing SVG" />
+<a href="https://github.com/themaker0">
+  <img src="https://raw.githubusercontent.com/themaker0/themaker0/main/assets/hero-banner.svg" alt="Mark Glenn Serinas - Software / Web Developer" width="100%"/>
+</a>
 
 <img src="https://komarev.com/ghpvc/?username=themaker0&label=Profile%20views&color=0e75b6&style=for-the-badge" alt="Profile Views" />
 
@@ -47,6 +45,12 @@
 
 ### 🛠️ Languages & Tools
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/themaker0/themaker0/main/assets/languages-marquee.svg" alt="Languages marquee" width="100%"/>
+</div>
+
+<br/>
+
 #### 🖥️ Programming Languages
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -85,19 +89,16 @@
 
 ### 📌 Featured Projects
 
+> 🚧 Currently building out a few projects worth sharing here — check back soon!
+> In the meantime, feel free to browse [all my repositories](https://github.com/themaker0?tab=repositories).
+
 <!--
-This is the single most important section to fill in — recruiters and visitors
-scan for real work before anything else. Replace the placeholders below with
-your best 2-4 repos. Example format:
+Once you have 2-4 solid repos, replace the note above with pin cards like this:
 
 <a href="https://github.com/themaker0/project-name">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=themaker0&repo=project-name&theme=tokyonight" />
 </a>
 -->
-
-<a href="https://github.com/themaker0?tab=repositories">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=themaker0&repo=REPLACE_WITH_REPO_NAME&theme=tokyonight" />
-</a>
 
 ---
 
