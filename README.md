@@ -1,8 +1,10 @@
 <div align="center">
 
-# Hi 👋, I'm Mark Glenn Serinas
+# Hi, I'm Mark Glenn Serinas 👋
 
-### 💻 Passionate Software/Web Developer from the Philippines
+### 💻 Software / Web Developer from the Philippines
+
+<img src="https://readme-typing-svg.demolab.com/?lines=Building+clean%2C+responsive+UIs;Always+learning+something+new;Open+to+collaboration+%26+freelance+work&font=Fira%20Code&center=true&width=440&height=45&color=0e75b6&vCenter=true&size=20" alt="Typing SVG" />
 
 <img src="https://komarev.com/ghpvc/?username=themaker0&label=Profile%20views&color=0e75b6&style=for-the-badge" alt="Profile Views" />
 
@@ -14,8 +16,9 @@
 
 ### 🙋‍♂️ About Me
 
-- 🌱 Currently A **Assistant Web / Software Developer**
+- 🌱 Currently an **Assistant Web / Software Developer**
 - 💬 Ask me about **HTML, CSS, JavaScript**
+- 🚀 Working on personal and freelance web projects
 - 📫 Reach me at **glenm906@gmail.com**
 - ⚡ Fun fact: I love building clean and responsive UIs
 
@@ -26,15 +29,17 @@
 <a href="https://fb.com/marck.facun.0120" target="_blank">
   <img src="https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white" alt="Facebook"/>
 </a>
-<a href="https://instagram.com/serrinaaawsss" target="_blank">
-  <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white" alt="Instagram"/>
-</a>
 <a href="mailto:glenm906@gmail.com">
   <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
 </a>
 <a href="https://github.com/themaker0" target="_blank">
   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
 </a>
+<!-- Swap or add your LinkedIn once you have one — it's one of the highest-value links on a dev profile:
+<a href="https://linkedin.com/in/your-handle" target="_blank">
+  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+</a>
+-->
 
 <br/><br/>
 
@@ -75,6 +80,24 @@
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS%20Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+
+---
+
+### 📌 Featured Projects
+
+<!--
+This is the single most important section to fill in — recruiters and visitors
+scan for real work before anything else. Replace the placeholders below with
+your best 2-4 repos. Example format:
+
+<a href="https://github.com/themaker0/project-name">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=themaker0&repo=project-name&theme=tokyonight" />
+</a>
+-->
+
+<a href="https://github.com/themaker0?tab=repositories">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=themaker0&repo=REPLACE_WITH_REPO_NAME&theme=tokyonight" />
+</a>
 
 ---
 
